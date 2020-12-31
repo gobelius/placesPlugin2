@@ -42,6 +42,20 @@
     width: 100%;
 }
 
+#loadingState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 50vh;
+    padding: 10vh;
+    margin-top: 20vh;
+}
+#loadingState h4 {
+    text-align: center;
+    font-weight: 400;
+}
+
 .animated {
   animation-duration: 400ms;
   animation-fill-mode: both;

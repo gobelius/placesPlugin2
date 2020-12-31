@@ -13,6 +13,7 @@ import "./detail.js";
 import "./router.js";
 import PlacesSort from "./PlacesSort.js";
 
+
 window.app = {
     goBack: null,
     settings: {
@@ -36,6 +37,7 @@ window.app = {
         sideNav: document.getElementById('sideNav'),
     },
     state: {
+        loading: true,
         mapInitiated: false,
         mode: null,
         activeView: null,
@@ -94,7 +96,6 @@ window.app = {
 
           const loadPage = () => {
             console.log('Places - Loading Page', page);
-
             buildfire.datastore.search({ page, pageSize, sort: (window.app.state.sortBy ? ({
                 title: (window.app.state.sortBy === 'alphaDesc' ? -1 : 1)
               }) : null)
@@ -126,9 +127,11 @@ window.app = {
               // If we have more pages we keep going
               if (result.length === pageSize) {
                 page++;
+                document.getElementById('loadingState').setAttribute('style', 'display: flex')
                 loadPage();
               } else {
                 console.log('Places - Done loading places - Got', places.length);
+                window.app.state.loading = false;
                 placesCallback(null, places);
               }
             });
